@@ -1,0 +1,20 @@
+# Системные файлы macOS
+.DS_Store
+
+# Python
+__pycache__/
+*.pyc
+
+# Сборка пакета
+build/
+dist/
+*.egg-info/
+
+# Среды и настройки
+.venv/
+.python-version
+uv.lock
+
+# IDE
+.vscode/
+.idea/

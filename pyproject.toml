@@ -7,4 +7,5 @@ requires-python = ">=3.13"
 dependencies = []
 
 [project.scripts]
-gendiff = "gendiff.scripts.gendiff:main"
+gendiff = "gendiff.main:main"
+

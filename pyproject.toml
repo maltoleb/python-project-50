@@ -9,7 +9,9 @@ packages = ["gendiff"]
 name = "hexlet-code"
 version = "0.1.0"
 description = "Compares two configuration files and shows a difference."
-dependencies = []
+dependencies = [
+    "ruff>=0.14.1",
+]
 
 [project.scripts]
 gendiff = "gendiff.main:main"

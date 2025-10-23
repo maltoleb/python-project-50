@@ -1,13 +1,11 @@
 from gendiff import cli
-import json
+from gendiff.generate_diff import generate_diff
 
 
 def main():
     args = cli.parse_args()
-    data1 = json.load(open(args.first_file))
-    data2 = json.load(open(args.second_file))
-    print(data1)
-    print(data2)
+    diff = generate_diff(args.first_file, args.second_file)
+    print(diff)
 
 
 if __name__ == '__main__':

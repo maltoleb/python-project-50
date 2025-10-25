@@ -1,4 +1,5 @@
 from pathlib import Path
+
 from gendiff.generate_diff import generate_diff
 
 

@@ -37,7 +37,7 @@ jobs:
       - name: Upload coverage to SonarCloud
         uses: SonarSource/sonarcloud-github-action@v2
         env:
-          SONAR_TOKEN: ${{ secrets.da226b3945e6441da21ddc598df7d0197964c0f9 }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         with:
           args: >
             -Dsonar.organization=maltoleb

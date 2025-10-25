@@ -43,3 +43,7 @@ jobs:
             -Dsonar.organization=maltoleb
             -Dsonar.projectKey=maltoleb_python-project-50
             -Dsonar.python.coverage.reportPaths=coverage.xml
+      - name: Run tests with coverage
+        run: uv run pytest --cov=gendiff --cov-report xml
+      - name: Check coverage file
+        run: ls -la coverage.xml

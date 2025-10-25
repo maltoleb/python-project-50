@@ -29,10 +29,18 @@ jobs:
         run: uv run ruff check gendiff tests
 
       - name: Run tests
-        run: uv run pytest
+        run: uv run pytest --maxfail=1 --disable-warnings -v
 
-      - name: Run coverage
+      - name: Run tests with coverage
         run: uv run pytest --cov=gendiff --cov-report xml
+
+      - name: Debug coverage paths
+        run: |
+          echo "Первые строки coverage.xml:"
+          head -n 20 coverage.xml
+          echo ""
+          echo "Файл coverage.xml в каталоге:"
+          ls -la coverage.xml
 
       - name: Upload coverage to SonarCloud
         uses: SonarSource/sonarcloud-github-action@v2
@@ -43,16 +51,4 @@ jobs:
             -Dsonar.organization=maltoleb
             -Dsonar.projectKey=maltoleb_python-project-50
             -Dsonar.python.coverage.reportPaths=coverage.xml
-      - name: Run tests with coverage
-        run: uv run pytest --cov=gendiff --cov-report xml
-      - name: Debug coverage paths
-        run: |
-          echo "Первые строки coverage.xml:"
-          head -n 20 coverage.xml
-      - name: Check coverage file
-        run: ls -la coverage.xml
-      - name: Upload coverage to SonarCloud
-        uses: SonarSource/sonarcloud-github-action@v2
-        env:
-          SONAR_TOKEN: ${{ secrets.SONARQUBE }}
-
+            -Dsonar.projectBaseDir=/home/runner/work/python-project-50/python-project-50

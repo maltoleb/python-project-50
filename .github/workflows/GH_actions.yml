@@ -46,9 +46,4 @@ jobs:
         uses: SonarSource/sonarcloud-github-action@v2
         env:
           SONAR_TOKEN: ${{ secrets.SONARQUBE }}
-        with:
-          args: >
-            -Dsonar.organization=maltoleb
-            -Dsonar.projectKey=maltoleb_python-project-50
-            -Dsonar.python.coverage.reportPaths=coverage.xml
-            -Dsonar.projectBaseDir=/home/runner/work/python-project-50/python-project-50
+        

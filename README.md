@@ -8,5 +8,5 @@ Asciinema 4th step of project2:
 https://asciinema.org/a/2UZnPAYXseAaB1vzz39bwc2ZK
 
 
-Asciinema 4th step of project2:
+Asciinema 6th step of project2:
 https://asciinema.org/a/vyrLObXclocmPhaS6KcJvVwjb

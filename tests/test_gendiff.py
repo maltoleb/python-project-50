@@ -15,6 +15,7 @@ def test_flat_json():
         
     assert result.strip() == expected_content.strip()
 
+
 def test_flat_yaml():
     base = Path('tests/test_data')
     file1 = base / 'file1.yml'

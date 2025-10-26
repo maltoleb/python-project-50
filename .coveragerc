@@ -1,0 +1,7 @@
+[run]
+source = gendiff
+relative_files = True
+
+[report]
+omit =
+    tests/*

@@ -3,6 +3,7 @@ import yaml
 
 
 def parse(file_path):
+    file_path = str(file_path)
     with open(file_path) as f:
         content = f.read()
         extension = file_path.split('.')[-1]

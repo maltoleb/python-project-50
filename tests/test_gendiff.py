@@ -14,3 +14,15 @@ def test_flat_json():
         expected_content = f.read()
         
     assert result.strip() == expected_content.strip()
+
+def test_flat_yaml():
+    base = Path('tests/test_data')
+    file1 = base / 'file1.yml'
+    file2 = base / 'file2.yml'
+    expected = base / 'expected_flat.txt'
+    result = generate_diff(file1, file2)
+    
+    with open(expected) as f:
+        expected_content = f.read()
+    
+    assert result.strip() == expected_content.strip()

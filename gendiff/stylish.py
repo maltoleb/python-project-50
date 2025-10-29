@@ -1,38 +1,44 @@
-def stringify(value):
-    if value is True:
+def stringify(value, depth):
+    if value == '':
+        return ''
+    if value is True or value == 'True':
         return 'true'
-    if value is False:
+    if value is False or value == 'False':
         return 'false'
-    if value is None:
+    if value is None or value == 'None':
         return 'null'
     if isinstance(value, dict):
+        indent = ' ' * (depth * 4)
+        closing_indent = ' ' * ((depth - 1) * 4)
         lines = []
         for key, val in value.items():
-            lines.append(f"    {key}: {stringify(val)}")
+            lines.append(f"{indent}{key}: {stringify(val, depth + 1)}")
         result = "\n".join(lines)
-        return f"{{\n{result}\n}}"
+        return f"{{\n{result}\n{closing_indent}}}"
+    return str(value)
 
-    
-def format_stylish(diff, depth = 1):
+
+def format_stylish(diff, depth=1):
     lines = []
-    indent = ' '*(depth*4-2)
+    indent = ' ' * (depth * 4 - 2)
+    closing_indent = ' ' * ((depth - 1) * 4)
+
     for node in diff:
-        if node['type'] == 'nested':
-            nested_value = format_stylish(node['children'], depth + 1)
-            lines.append(f"{indent}  {node['key']}: {nested_value}")
-        elif node['type'] == 'added':
-            added_line = f"{indent}+ {node['key']}: {stringify(node['value'], depth + 1)}"
-            lines.append(added_line)
-        elif node['type'] == 'removed':
-            removed_line = f"{indent}- {node['key']}: {stringify(node['value'], depth + 1)}"
-            lines.append(removed_line)        
-        elif node['type'] == 'unchanged':
-            unchanged_line = f"{indent}  {node['key']}: {stringify(node['value'], depth + 1)}"
-            lines.append(unchanged_line)
-        elif node['type'] == 'updated':
-            updated_line1 = f"{indent}- {node['key']}: {stringify(node['old_value'], depth + 1)}"
-            updated_line2 = f"{indent}+ {node['key']}: {stringify(node['new_value'], depth + 1)}"
-            lines.append(updated_line1)
-            lines.append(updated_line2)
-    result_line = '\n'.join(lines)
-    return f"{{\n{result_line}\n}}"
+        key = node['key']
+        node_type = node['type']
+
+        if node_type == 'nested':
+            nested = format_stylish(node['children'], depth + 1)
+            lines.append(f"{indent}  {key}: {nested}")
+        elif node_type == 'added':
+            lines.append(f"{indent}+ {key}: {stringify(node['value'], depth + 1)}")
+        elif node_type == 'removed':
+            lines.append(f"{indent}- {key}: {stringify(node['value'], depth + 1)}")
+        elif node_type == 'unchanged':
+            lines.append(f"{indent}  {key}: {stringify(node['value'], depth + 1)}")
+        elif node_type == 'updated':
+            lines.append(f"{indent}- {key}: {stringify(node['old_value'], depth + 1)}")
+            lines.append(f"{indent}+ {key}: {stringify(node['new_value'], depth + 1)}")
+
+    result = "\n".join(lines)
+    return f"{{\n{result}\n{closing_indent}}}"

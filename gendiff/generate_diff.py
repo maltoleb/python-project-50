@@ -12,6 +12,10 @@ def generate_diff(filepath1, filepath2):
 def build_diff(data1, data2):
     diff = []
     keys = sorted(set(data1.keys()) | set(data2.keys()))
+    if data1 is None:
+        data1 = {}
+    if data2 is None:
+        data2 = {}
     for key in keys:
         if key not in data2:
             diff.append({

@@ -20,7 +20,7 @@ def stringify(value, depth):
     return str(value)
 
 
-def format_stylish(diff, depth=1): # noqa: C901
+def format_stylish(diff, depth=1):  # noqa: C901
     lines = []
     indent = ' ' * (depth * 4 - 2)
     closing_indent = ' ' * ((depth - 1) * 4)

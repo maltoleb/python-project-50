@@ -1,8 +1,7 @@
 import json
+from pathlib import Path
 
 import yaml
-
-from pathlib import Path
 
 
 def parse(file_path):

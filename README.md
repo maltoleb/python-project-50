@@ -10,3 +10,7 @@ https://asciinema.org/a/2UZnPAYXseAaB1vzz39bwc2ZK
 
 Asciinema 6th step of project2:
 https://asciinema.org/a/vyrLObXclocmPhaS6KcJvVwjb
+
+
+Asciinema 7th step of project2:
+https://asciinema.org/a/4BfLJP9iCthsBHp3XnHg1mSN8

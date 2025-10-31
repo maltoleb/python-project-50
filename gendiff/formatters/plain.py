@@ -12,7 +12,7 @@ def stringify(value):
     return str(value)
     
 
-def format_plain(diff, path = ''):
+def format_plain(diff, path=''):
     lines = []
     for node in diff:
         key = node['key']
@@ -34,6 +34,9 @@ def format_plain(diff, path = ''):
             case 'updated':
                 old_value = stringify(node['old_value'])
                 new_value = stringify(node['new_value'])
-                updated = f"Property '{full_path}' was updated. From {old_value} to {new_value}"
+                updated = (
+                    f"Property '{full_path}' was updated. "
+                    f"From {old_value} to {new_value}"
+                )
                 lines.append(updated)
     return "\n".join(lines)

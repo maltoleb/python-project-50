@@ -1,8 +1,8 @@
-from gendiff.parser import parse
 from gendiff.formatters import format_diff
+from gendiff.parser import parse
 
 
-def generate_diff(filepath1, filepath2, format_name = 'stylish'):
+def generate_diff(filepath1, filepath2, format_name='stylish'):
     data1 = parse(filepath1)
     data2 = parse(filepath2)
     resulted_list = build_diff(data1, data2)

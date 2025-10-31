@@ -4,13 +4,17 @@
 [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=maltoleb_python-project-50&metric=coverage)](https://sonarcloud.io/summary/new_code?id=maltoleb_python-project-50)
 
 
-Asciinema 4th step of project2:
+Asciinema of 4th step of project2:
 https://asciinema.org/a/2UZnPAYXseAaB1vzz39bwc2ZK
 
 
-Asciinema 6th step of project2:
+Asciinema of 6th step of project2:
 https://asciinema.org/a/vyrLObXclocmPhaS6KcJvVwjb
 
 
-Asciinema 7th step of project2:
+Asciinema of 7th step of project2:
 https://asciinema.org/a/4BfLJP9iCthsBHp3XnHg1mSN8
+
+
+Asciinema of 8th step of project2:
+https://asciinema.org/a/SVzN4cCbrF2VmwLSvPpJqcj6H

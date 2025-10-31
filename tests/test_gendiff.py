@@ -53,3 +53,16 @@ def test_nested_yaml():
         expected_content = f.read()
     
     assert result.strip() == expected_content.strip()
+
+
+def test_plain():
+    base = Path('tests/test_data')
+    file1 = base / 'file1_nested.json'
+    file2 = base / 'file2_nested.json'
+    expected = base / 'expected_plain.txt'
+    result = generate_diff(file1, file2, 'plain')
+
+    with open(expected) as f:
+        expected_content = f.read()
+    
+    assert result.strip() == expected_content.strip()

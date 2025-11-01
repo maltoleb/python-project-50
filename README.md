@@ -18,3 +18,7 @@ https://asciinema.org/a/4BfLJP9iCthsBHp3XnHg1mSN8
 
 Asciinema of 8th step of project2:
 https://asciinema.org/a/SVzN4cCbrF2VmwLSvPpJqcj6H
+
+
+Asciinema of 9th step of project2:
+https://asciinema.org/a/HXtTu0ZNuRxI2xdUu053nYOPP

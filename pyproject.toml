@@ -15,7 +15,7 @@ dependencies = [
 ]
 
 [project.scripts]
-gendiff = "gendiff.main:main"
+gendiff = "gendiff.cli:main"
 
 [dependency-groups]
 dev = [

@@ -66,3 +66,16 @@ def test_plain():
         expected_content = f.read()
     
     assert result.strip() == expected_content.strip()
+
+
+def test_json():
+    base = Path('tests/test_data')
+    file1 = base / 'file1.json'
+    file2 = base / 'file2.json'
+    expected = base / 'expected_json.txt'
+    result = generate_diff(file1, file2, 'json')
+
+    with open(expected) as f:
+        expected_content = f.read()
+
+    assert result.strip() == expected_content.strip()

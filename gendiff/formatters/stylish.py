@@ -21,7 +21,6 @@ def stringify(value, depth):
         result = '\n'.join(lines)
         return f"{{\n{result}\n{closing_indent}}}"
 
-
     return str(value)
 
 
@@ -31,10 +30,8 @@ def format_stylish(diff, depth=1):  # noqa: C901
     closing_indent = ' ' * ((depth - 1) * 4)
 
     def render_line(sign, key, value):
-        value_str = stringify(value, depth)
-        if value_str == '':
-            return f"{indent}{sign}{key}:"
-        return f"{indent}{sign}{key}: {value_str}"
+        val_str = stringify(value, depth)
+        return f"{indent}{sign}{key}:" if val_str == '' else f"{indent}{sign}{key}: {val_str}"
 
     for node in diff:
         key = node['key']
@@ -43,16 +40,12 @@ def format_stylish(diff, depth=1):  # noqa: C901
         if node_type == 'nested':
             nested = format_stylish(node['children'], depth + 1)
             lines.append(f"{indent}  {key}: {nested}")
-
         elif node_type == 'added':
             lines.append(render_line('+ ', key, node['value']))
-
         elif node_type == 'removed':
             lines.append(render_line('- ', key, node['value']))
-
         elif node_type == 'unchanged':
             lines.append(render_line('  ', key, node['value']))
-
         elif node_type == 'updated':
             lines.append(render_line('- ', key, node['old_value']))
             lines.append(render_line('+ ', key, node['new_value']))

@@ -1,6 +1,6 @@
 def stringify(value, depth):
     if value == '':
-        return ' '
+        return ''
     if value is True:
         return 'True' if depth == 1 else 'true'
     if value is False:
@@ -25,6 +25,11 @@ def format_stylish(diff, depth=1):  # noqa: C901
     indent = ' ' * (depth * 4 - 2)
     closing_indent = ' ' * ((depth - 1) * 4)
 
+    def render_line(sign, key, value):
+        value_str = stringify(value, depth)
+        sep = '' if value_str == '' else f' {value_str}'
+        return f"{indent}{sign}{key}:{sep}"
+
     for node in diff:
         key = node['key']
         node_type = node['type']
@@ -34,39 +39,17 @@ def format_stylish(diff, depth=1):  # noqa: C901
             lines.append(f"{indent}  {key}: {nested}")
 
         elif node_type == 'added':
-            val = stringify(node['value'], depth)
-            if val == ' ':
-                lines.append(f"{indent}+ {key}:")
-            else:
-                lines.append(f"{indent}+ {key}: {val}")
+            lines.append(render_line('+ ', key, node['value']))
 
         elif node_type == 'removed':
-            val = stringify(node['value'], depth)
-            if val == ' ':
-                lines.append(f"{indent}- {key}:")
-            else:
-                lines.append(f"{indent}- {key}: {val}")
+            lines.append(render_line('- ', key, node['value']))
 
         elif node_type == 'unchanged':
-            val = stringify(node['value'], depth)
-            if val == ' ':
-                lines.append(f"{indent}  {key}:")
-            else:
-                lines.append(f"{indent}  {key}: {val}")
+            lines.append(render_line('  ', key, node['value']))
 
         elif node_type == 'updated':
-            old_val = stringify(node['old_value'], depth)
-            new_val = stringify(node['new_value'], depth)
-
-            if old_val == ' ':
-                lines.append(f"{indent}- {key}:")
-            else:
-                lines.append(f"{indent}- {key}: {old_val}")
-
-            if new_val == ' ':
-                lines.append(f"{indent}+ {key}:")
-            else:
-                lines.append(f"{indent}+ {key}: {new_val}")
+            lines.append(render_line('- ', key, node['old_value']))
+            lines.append(render_line('+ ', key, node['new_value']))
 
     result = '\n'.join(lines)
     return f"{{\n{result}\n{closing_indent}}}"

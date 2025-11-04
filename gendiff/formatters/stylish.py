@@ -1,7 +1,9 @@
 def stringify(value, depth):
+    # Нормализуем YAML-пустые значения ('', ' ', '\n', '\r', etc.)
     if isinstance(value, str) and value.strip() == '':
         return ''
 
+    # Настоящие None из JSON — null
     if value is None:
         return 'null'
 
@@ -30,10 +32,11 @@ def format_stylish(diff, depth=1):  # noqa: C901
     closing_indent = ' ' * ((depth - 1) * 4)
 
     def render_line(sign, key, value):
+        # Нормализуем строки перед проверкой — обрезаем пробелы и переводы строк
         val_str = stringify(value, depth).strip()
         return (f"{indent}{sign}{key}:"
-        if val_str == ''
-        else f"{indent}{sign}{key}: {val_str}")
+                if val_str == ''
+                else f"{indent}{sign}{key}: {val_str}")
 
     for node in diff:
         key = node['key']

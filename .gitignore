@@ -21,3 +21,8 @@ uv.lock
 
 #Asciinemas
 *.cast
+
+
+#Coverage
+.coverage
+.coveragerc

@@ -15,9 +15,12 @@ def stringify(value, depth):
         closing_indent = ' ' * (depth * 4)
         lines = []
         for key, val in value.items():
-            lines.append(f"{indent}{key}: {stringify(val, depth + 1)}")
+            child = stringify(val, depth + 1)
+            sep = '' if child == '' else f' {child}'
+            lines.append(f"{indent}{key}:{sep}")
         result = '\n'.join(lines)
         return f"{{\n{result}\n{closing_indent}}}"
+
 
     return str(value)
 

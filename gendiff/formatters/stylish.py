@@ -2,12 +2,13 @@ def stringify(value, depth):
     if isinstance(value, str) and value.strip() == '':
         return ''
 
+    if value is None:
+        return 'null'
+
     if value is True:
         return 'True' if depth == 1 else 'true'
     if value is False:
         return 'False' if depth == 1 else 'false'
-    if value is None:
-        return 'None' if depth == 1 else 'null'
 
     if isinstance(value, dict):
         indent = ' ' * ((depth + 1) * 4)
@@ -28,8 +29,9 @@ def format_stylish(diff, depth=1):  # noqa: C901
 
     def render_line(sign, key, value):
         value_str = stringify(value, depth)
-        sep = '' if value_str == '' else f' {value_str}'
-        return f"{indent}{sign}{key}:{sep}"
+        if value_str == '':
+            return f"{indent}{sign}{key}:"
+        return f"{indent}{sign}{key}: {value_str}"
 
     for node in diff:
         key = node['key']

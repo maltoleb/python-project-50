@@ -26,7 +26,7 @@ def format_stylish(diff, depth=1):  # noqa: C901
     closing_indent = ' ' * ((depth - 1) * 4)
 
     def render_line(sign, key, value):
-        value_str = stringify(value, depth)
+        value_str = stringify(value, depth).strip()
         sep = '' if value_str == '' else f' {value_str}'
         return f"{indent}{sign}{key}:{sep}"
 

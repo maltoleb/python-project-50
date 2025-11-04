@@ -18,9 +18,8 @@ def stringify(value, depth):
         lines = []
         for key, val in value.items():
             child = stringify(val, depth + 1)
-            # 🔥 Исправлено: если значение пустое — без пробела после двоеточия
             if child == '':
-                lines.append(f"{indent}{key}:")
+                lines.append(f"{indent}{key}: ")  # ← пробел после двоеточия
             else:
                 lines.append(f"{indent}{key}: {child}")
         result = '\n'.join(lines)
@@ -35,9 +34,9 @@ def format_stylish(diff, depth=1):  # noqa: C901
     closing_indent = ' ' * ((depth - 1) * 4)
 
     def render_line(sign, key, value):
-        # Нормализуем строки перед проверкой — обрезаем пробелы и переводы строк
-        val_str = stringify(value, depth).strip()
-        return (f"{indent}{sign}{key}:"
+        # НЕ режем пробелы — нужно сохранить единственный пробел после ":" для пустых значений
+        val_str = stringify(value, depth)  # ← убрали .strip()
+        return (f"{indent}{sign}{key}: "
                 if val_str == ''
                 else f"{indent}{sign}{key}: {val_str}")
 

@@ -1,9 +1,7 @@
 def stringify(value, depth):
-    # Нормализуем YAML-пустые значения ('', ' ', '\n', '\r', etc.)
     if isinstance(value, str) and value.strip() == '':
         return ''
 
-    # Настоящие None из JSON — null
     if value is None:
         return 'null'
 
@@ -19,7 +17,7 @@ def stringify(value, depth):
         for key, val in value.items():
             child = stringify(val, depth + 1)
             if child == '':
-                lines.append(f"{indent}{key}: ")  # ← пробел после двоеточия
+                lines.append(f"{indent}{key}: ")
             else:
                 lines.append(f"{indent}{key}: {child}")
         result = '\n'.join(lines)
@@ -34,8 +32,7 @@ def format_stylish(diff, depth=1):  # noqa: C901
     closing_indent = ' ' * ((depth - 1) * 4)
 
     def render_line(sign, key, value):
-        # НЕ режем пробелы — нужно сохранить единственный пробел после ":" для пустых значений
-        val_str = stringify(value, depth)  # ← убрали .strip()
+        val_str = stringify(value, depth)  
         return (f"{indent}{sign}{key}: "
                 if val_str == ''
                 else f"{indent}{sign}{key}: {val_str}")

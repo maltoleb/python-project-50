@@ -44,8 +44,6 @@ jobs:
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          SONAR_PROJECT_KEY: maltoleb_python-project-50
-          SONAR_ORGANIZATION: maltoleb
-          SONAR_PYTHON_COVERAGE_REPORTPATHS: coverage.xml
-          SONAR_COVERAGE_EXCLUSIONS: tests/**
-          SONAR_EXCLUSIONS: tests/**
+        with:
+          args: "-Dsonar.projectKey=maltoleb_python-project-50 -Dsonar.organization=maltoleb -Dsonar.python.coverage.reportPaths=coverage.xml -Dsonar.coverage.exclusions=tests/** -Dsonar.exclusions=tests/**"
+

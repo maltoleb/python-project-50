@@ -28,11 +28,8 @@ jobs:
       - name: Run linter (ruff)
         run: uv run ruff check gendiff tests
 
-      - name: Run tests
-        run: uv run pytest --maxfail=1 --disable-warnings -v
-
       - name: Run tests with coverage
-        run: uv run pytest --cov=gendiff --cov-report xml
+        run: make test-coverage
 
       - name: Debug coverage paths
         run: |
@@ -45,5 +42,10 @@ jobs:
       - name: Upload coverage to SonarCloud
         uses: SonarSource/sonarcloud-github-action@v2
         env:
-          SONAR_TOKEN: ${{ secrets.SONARQUBE }}
-        
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SONAR_PROJECT_KEY: maltoleb_python-project-50
+          SONAR_ORGANIZATION: maltoleb
+          SONAR_PYTHON_COVERAGE_REPORTPATHS: coverage.xml
+          SONAR_COVERAGE_EXCLUSIONS: tests/**
+          SONAR_EXCLUSIONS: tests/**

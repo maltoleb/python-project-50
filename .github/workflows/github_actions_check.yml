@@ -13,6 +13,8 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # убирает warning "Shallow clone detected"
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -28,9 +30,19 @@ jobs:
       - name: Run linter (ruff)
         run: uv run ruff check gendiff tests
 
-      - name: Run tests with coverage
+      # 🔹 создаём временный .coveragerc только в CI (в репо он не хранится)
+      - name: Prepare coverage config
         run: |
-          uv run pytest --cov=gendiff --cov-report=xml:coverage.xml
+          echo "[run]" > .coveragerc
+          echo "source = gendiff" >> .coveragerc
+          echo "relative_files = True" >> .coveragerc
+          echo "[paths]" >> .coveragerc
+          echo "source =" >> .coveragerc
+          echo "    gendiff" >> .coveragerc
+          echo "    /home/runner/work/python-project-50/python-project-50/gendiff" >> .coveragerc
+
+      - name: Run tests with coverage
+        run: uv run pytest --cov=gendiff --cov-report=xml:coverage.xml --cov-config=.coveragerc
 
       - name: Debug coverage paths
         run: |
@@ -46,5 +58,3 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          args: "-Dsonar.projectKey=maltoleb_python-project-50 -Dsonar.organization=maltoleb -Dsonar.python.coverage.reportPaths=coverage.xml -Dsonar.coverage.exclusions=tests/** -Dsonar.exclusions=tests/**"
-

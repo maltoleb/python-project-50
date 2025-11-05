@@ -30,9 +30,7 @@ jobs:
 
       - name: Run tests with coverage
         run: |
-          cd /github/workspace
           uv run pytest --cov=gendiff --cov-report=xml:coverage.xml
-
 
       - name: Debug coverage paths
         run: |

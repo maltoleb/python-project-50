@@ -58,3 +58,4 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
+          args: "-Dsonar.projectKey=maltoleb_python-project-50 -Dsonar.organization=maltoleb -Dsonar.python.version=3.12 -Dsonar.python.coverage.reportPaths=coverage.xml -Dsonar.sources=gendiff -Dsonar.coverage.exclusions=tests/** -Dsonar.exclusions=tests/**"
